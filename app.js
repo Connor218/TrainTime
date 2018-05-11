@@ -13,21 +13,21 @@ var config = {
   var database = firebase.database();
   
   // 2. Button for adding Employees
-  $("#add-employee-btn").on("click", function(event) {
+  $("#add-train-btn").on("click", function(event) {
     event.preventDefault();
   
     // Grabs user input
-    var empName = $("#employee-name-input").val().trim();
-    var empRole = $("#role-input").val().trim();
-    var empStart = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
-    var empRate = $("#rate-input").val().trim();
+    var trainName = $("#employee-name-input").val().trim();
+    var destination = $("#role-input").val().trim();
+    var tTime = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
+    var frequency = $("#rate-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
     var newEmp = {
-      name: empName,
-      role: empRole,
-      start: empStart,
-      rate: empRate
+      name: trainName,
+      role: destination,
+      start: tTime,
+      rate: frequency
     };
   
     // Uploads employee data to the database
@@ -56,30 +56,30 @@ var config = {
     console.log(childSnapshot.val());
   
     // Store everything into a variable.
-    var empName = childSnapshot.val().name;
-    var empRole = childSnapshot.val().role;
-    var empStart = childSnapshot.val().start;
-    var empRate = childSnapshot.val().rate;
+    var trainName = childSnapshot.val().name;
+    var trRole = childSnapshot.val().role;
+    var tTime = childSnapshot.val().start;
+    var frequency = childSnapshot.val().rate;
   
     // Employee Info
-    console.log(empName);
-    console.log(empRole);
-    console.log(empStart);
-    console.log(empRate);
+    console.log(trainName);
+    console.log(destination);
+    console.log(tTime);
+    console.log(frequency);
   
     // Prettify the employee start
-    var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+    var empStartPretty = moment.unix(tTime).format("MM/DD/YY");
   
     // Calculate the months worked using hardcore math
     // To calculate the months worked
-    var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
+    var empMonths = moment().diff(moment.unix(tTime, "X"), "months");
     console.log(empMonths);
   
     // Calculate the total billed rate
-    var empBilled = empMonths * empRate;
+    var empBilled = empMonths * frequency;
     console.log(empBilled);
   
     // Add each train's data into the table
-    $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-    empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+    $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + destination + "</td><td>" +
+    empStartPretty + "</td><td>" + empMonths + "</td><td>" + frequency + "</td><td>" + empBilled + "</td></tr>");
   });
