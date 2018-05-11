@@ -17,8 +17,8 @@ var config = {
     event.preventDefault();
   
     // Grabs user input
-    var trainName = $("#employee-name-input").val().trim();
-    var destination = $("#role-input").val().trim();
+    var trainName = $("#train-name").val().trim();
+    var destination = $("#dest-input").val().trim();
     var tTime = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
     var frequency = $("#rate-input").val().trim();
   
@@ -41,8 +41,8 @@ var config = {
 
   
     // Clears all of the text-boxes
-    $("#employee-name-input").val("");
-    $("#role-input").val("");
+    $("#train-name").val("");
+    $("#dest-input").val("");
     $("#start-input").val("");
     $("#rate-input").val("");
   
