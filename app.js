@@ -23,7 +23,7 @@ var config = {
     var frequency = $("#rate-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
-    var newEmp = {
+    var newTrain = {
       name: trainName,
       role: destination,
       start: tTime,
@@ -31,16 +31,14 @@ var config = {
     };
   
     // Uploads employee data to the database
-    database.ref().push(newEmp);
+    database.ref().push(newTrain);
   
     // Logs everything to console
-    console.log(newEmp.name);
-    console.log(newEmp.role);
-    console.log(newEmp.start);
-    console.log(newEmp.rate);
-  
-    // Alert
-    alert("Employee successfully added");
+    console.log(newTrain.name);
+    console.log(newTrain.role);
+    console.log(newTrain.start);
+    console.log(newTrain.rate);
+
   
     // Clears all of the text-boxes
     $("#employee-name-input").val("");
@@ -68,7 +66,7 @@ var config = {
     console.log(frequency);
   
     // Prettify the employee start
-    var empStartPretty = moment.unix(tTime).format("MM/DD/YY");
+    var trainStart = moment.unix(tTime).format("MM/DD/YY");
   
     // Calculate the months worked using hardcore math
     // To calculate the months worked
@@ -81,5 +79,5 @@ var config = {
   
     // Add each train's data into the table
     $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + destination + "</td><td>" +
-    empStartPretty + "</td><td>" + empMonths + "</td><td>" + frequency + "</td><td>" + empBilled + "</td></tr>");
+    trainStart + "</td><td>" + empMonths + "</td><td>" + frequency + "</td><td>" + empBilled + "</td></tr>");
   });
