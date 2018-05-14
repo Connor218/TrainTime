@@ -55,7 +55,7 @@ var config = {
   
     // Store everything into a variable.
     var trainName = childSnapshot.val().name;
-    var trRole = childSnapshot.val().role;
+    var destination = childSnapshot.val().role;
     var tTime = childSnapshot.val().start;
     var frequency = childSnapshot.val().rate;
   
@@ -66,18 +66,17 @@ var config = {
     console.log(frequency);
   
     // Prettify the employee start
-    var trainStart = moment.unix(tTime).format("MM/DD/YY");
-  
-    // Calculate the months worked using hardcore math
-    // To calculate the months worked
-    var empMonths = moment().diff(moment.unix(tTime, "X"), "months");
-    console.log(empMonths);
-  
-    // Calculate the total billed rate
-    var empBilled = empMonths * frequency;
-    console.log(empBilled);
+    var trainStart = moment(tTime, "HH:mm").format("HH:mm");
+ 
+    var nextTrain = moment().diff(moment(tTime, "HH:mm"), "minutes");
+    nextTrain = nextTrain%frequency;
+    
+    var nextArrival = moment().add(nextTrain,"minutes").format("HH:mm");
+    console.log(nextTrain);
+ 
+ 
   
     // Add each train's data into the table
-    $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + destination + "</td><td>" +
-    trainStart + "</td><td>" + empMonths + "</td><td>" + frequency + "</td><td>" + empBilled + "</td></tr>");
+    $("#employee-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
+    frequency + "</td><td>" + nextArrival + "</td><td>" + nextTrain + "</td><td>");
   });
